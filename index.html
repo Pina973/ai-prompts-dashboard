@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KI-Prompts für Social Media Manager</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background-color: #fafafa;
+      color: #333;
+    }
+    
+    .header {
+      background-color: #fff;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 40px 20px;
+    }
+    
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      font-size: 32px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #000;
+    }
+    
+    .subtitle {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    
+    .info-banner {
+      background-color: #f3f4f6;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 24px;
+      font-size: 14px;
+      color: #374151;
+      font-weight: 500;
+    }
+    
+    .controls {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    
+    .search-box {
+      flex: 1;
+      min-width: 250px;
+      padding: 10px 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: inherit;
+    }
+    
+    .filter-buttons {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .filter-btn {
+      padding: 8px 14px;
+      border: 1px solid #d1d5db;
+      background-color: #fff;
+      color: #666;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .filter-btn.active {
+      border-color: #000;
+      background-color: #000;
+      color: #fff;
+    }
+    
+    .filter-btn:hover:not(.active) {
+      border-color: #999;
+    }
+    
+    .main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .card {
+      background-color: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all 0.2s;
+    }
+    
+    .card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #000;
+    }
+    
+    .card-meta {
+      display: flex;
+      gap: 8px;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+    
+    .card-meta span:nth-child(2) {
+      color: #d1d5db;
+    }
+    
+    .card-level {
+      font-size: 16px;
+      white-space: nowrap;
+    }
+    
+    .card-text {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #4b5563;
+      flex: 1;
+    }
+    
+    .copy-btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #f3f4f6;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: #666;
+      font-family: inherit;
+    }
+    
+    .copy-btn:hover {
+      background-color: #e5e7eb;
+    }
+    
+    .copy-btn.copied {
+      background-color: #4caf50;
+      color: #fff;
+      border-color: #4caf50;
+    }
+    
+    .stats {
+      background-color: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .stats-number {
+      font-size: 18px;
+      font-weight: 600;
+      color: #000;
+    }
+    
+    .stats-text {
+      font-size: 14px;
+      color: #666;
+    }
+    
+    .no-results {
+      font-size: 13px;
+      color: #999;
+      margin-top: 8px;
+    }
+    
+    .categories {
+      margin-top: 40px;
+    }
+    
+    .categories h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: #000;
+    }
+    
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    
+    .category-card {
+      background-color: #f9fafb;
+      border: 1px solid #e5e5e5;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 13px;
+    }
+    
+    .category-name {
+      font-weight: 500;
+      color: #000;
+      margin-bottom: 4px;
+    }
+    
+    .category-count {
+      color: #9ca3af;
+      font-size: 12px;
+    }
+    
+    .footer {
+      background-color: #f9fafb;
+      border-top: 1px solid #e5e5e5;
+      padding: 32px 20px;
+      margin-top: 60px;
+      text-align: center;
+    }
+    
+    .footer p {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+    }
+    
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-inner">
+      <h1>KI-Prompts für Social Media Manager</h1>
+      <p class="subtitle">20+ Copy-Ready Prompts für ChatGPT, Claude & Co. – zum direkt Einfügen und Zeit Sparen</p>
+      
+      <div class="info-banner">
+        💡 Diese Prompts sparen dir 2-3 Stunden pro Woche – strukturiert nach 7 Kategorien für alle Erfahrungsstufen
+      </div>
+      
+      <div class="controls">
+        <input 
+          type="text" 
+          id="searchBox" 
+          class="search-box" 
+          placeholder="Nach Keyword, Kategorie suchen..."
+        >
+        <div class="filter-buttons">
+          <button class="filter-btn active" onclick="filterLevel('all')">Alle</button>
+          <button class="filter-btn" onclick="filterLevel('anfaenger')">🟢 Anfänger</button>
+          <button class="filter-btn" onclick="filterLevel('fortgeschrittene')">🟠 Fortgeschrittene</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="grid" id="promptsGrid"></div>
+    
+    <div class="stats">
+      <div style="display: inline;">
+        <span class="stats-number" id="resultCount">28</span>
+        <span class="stats-text" id="resultText"> Prompts gefunden</span>
+      </div>
+      <div class="no-results hidden" id="noResults">
+        Keine Prompts gefunden. Versuche einen anderen Suchbegriff.
+      </div>
+    </div>
+    
+    <div class="categories">
+      <h2>Kategorien-Übersicht</h2>
+      <div class="categories-grid" id="categoriesGrid"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>💾 Tipp: Speichern Sie dieses Dashboard als Lesezeichen. Passen Sie die Prompts an Ihre spezifische Nische und Zielgruppe an.</p>
+  </div>
+
+  <script>
+    const prompts = [
+      { id: 1, title: "Competitor Benchmarking", category: "Competitor Analysis", level: "anfaenger", text: "Analysiere folgende 3 Konkurrenten im Bereich [BRANCHE]: [KONKURRENT 1], [KONKURRENT 2], [KONKURRENT 3]. Vergleiche ihre Posting-Frequenz, Engagement-Rate, Content-Pillars und Zielgruppe. Erstelle eine Tabelle mit den wichtigsten Unterschieden und Staerken." },
+      { id: 2, title: "Content Gap Analysis", category: "Competitor Analysis", level: "fortgeschrittene", text: "Ich habe die letzten 50 Posts von [KONKURRENT] analysiert. Die Top-Themen sind: [THEMEN]. Welche Themen in [BRANCHE] werden von Konkurrenten ignoriert, aber haben hohes Suchvolumen? Gib mir 10 Content-Ideen als Tabelle (Thema | Suchvolumen | Engagement-Potenzial | Content-Format) fuer diese Luecken." },
+      { id: 3, title: "Hashtag-Performance der Konkurrenz", category: "Competitor Analysis", level: "fortgeschrittene", text: "Analysiere die Hashtags, die Top-Accounts in [NISCHE] am haeufigsten nutzen. Gruppiere sie nach Reichweite (1-5M / 100K-1M / 10K-100K) und erstelle eine Tabelle mit den besten 15 Hashtags nach Verhaeltnis zwischen Reichweite und Wettbewerb." },
+      { id: 4, title: "Competitor Posting Strategy Audit", category: "Competitor Analysis", level: "anfaenger", text: "Analysiere die Posting-Strategie von [KONKURRENTS INSTAGRAM]. Erstelle eine Wochenuebersicht-Tabelle (Wochentag | Posting-Zeit | Content-Format | Engagement). Welche Content-Formate nutzen sie am haeufigsten (Carousel, Reel, Story)?" },
+      { id: 5, title: "Detaillierte Buyer Persona", category: "Buyer Persona & Zielgruppe", level: "anfaenger", text: "Erstelle 3 detaillierte Buyer Personas als Steckbriefe fuer [PRODUKT/SERVICE]. Pro Persona: Name, Alter, Beruf, Einkommen, Ziele, Top-3 Schmerzpunkte, Lieblings-Plattformen, Online-Verhalten, Kauftrigger und ideale Messaging." },
+      { id: 6, title: "Psychografisches Profiling", category: "Buyer Persona & Zielgruppe", level: "fortgeschrittene", text: "Erstelle ein psychografisches Profil-Steckbrief fuer [BESCHREIBUNG]. Analysiere als Tabelle: Werte | Ueberzeugungen | Lifestyle | Aspirationen | Archetypen (z.B. Hero, Sage, Creator). Gib mir Messaging-Anpassung (Tone of Voice | Messaging-Angles | ideale Pillar)." },
+      { id: 7, title: "Content Preferences nach Segment", category: "Buyer Persona & Zielgruppe", level: "anfaenger", text: "Analysiere die Content-Vorlieben fuer [SEGMENT 1], [SEGMENT 2], [SEGMENT 3]. Erstelle eine Vergleichstabelle (Segment | Top-Formate | Ideale Laengen | Lieblings-Themen | Optimal-CTA | Posting-Zeit) fuer jedes Segment." },
+      { id: 8, title: "Audience Pain Point Mapping", category: "Buyer Persona & Zielgruppe", level: "fortgeschrittene", text: "Identifiziere die 10 groessten Schmerzpunkte fuer [ZIELGRUPPE] im Kontext [LOESUNG]. Erstelle eine Ranking-Tabelle (Problem | Dringlichkeit | Impact | Messaging-Angle). Fuer jeden Pain Point: ideale Messaging-Strategie." },
+      { id: 9, title: "Content Idea Generator", category: "Content Brainstorm", level: "anfaenger", text: "Generiere 20 Content-Ideen als Tabelle fuer [PLATFORM] (Branche: [BRANCHE], Zielgruppe: [ZIELGRUPPE]). Spalten: ID | Idee | Format (Reel/Carousel/Story/Post) | Engagement-Potenzial | Gap-Luecke. Fokus auf Content-Luecken." },
+      { id: 10, title: "Trend-Jacking Strategy", category: "Content Brainstorm", level: "fortgeschrittene", text: "Analysiere die Top-5-Trends auf [PLATFORM] diese Woche in [NISCHE]. Gib mir eine Tabelle (Trend | Viralitaets-Potenzial | Brand-Fit | Konkrete Idee | Best-Time-to-Post) mit brandkonformen Umsetzungsideen." },
+      { id: 11, title: "Engagement Bait ohne Spam", category: "Content Brainstorm", level: "anfaenger", text: "Erstelle 10 Comment-Prompts als Liste fuer [ZIELGRUPPE] zu [TOPIC]. Spalten: Frage | Engagement-Taktik (Meinung/Erlebnis/Tipp/Wahl) | Authentizitaets-Level | CTA. Alle sollten authentisch sein, ohne Manipulation." },
+      { id: 12, title: "Content Repurposing Plan", category: "Content Brainstorm", level: "fortgeschrittene", text: "Erstelle einen Repurposing-Plan fuer den Blog-Post ueber [TOPIC]. Gib mir 15+ konkrete Posts als Tabelle (Plattform | Format | Laenge | Hook | CTA) optimiert fuer Instagram, TikTok, LinkedIn, Pinterest mit spezifischen Copy-Varianten." },
+      { id: 13, title: "Hashtag-Set fuer maximale Reichweite", category: "Hashtag Research & Strategy", level: "anfaenger", text: "Mein Post handelt von [TOPIC]. Gib mir einen Hashtag-Mix: 5 mega-breite (1-10M), 5 breite (100K-1M), 5 mittlere (10K-100K), 5 nische (1K-10K). Alle sollten relevant und nicht saturiert sein." },
+      { id: 14, title: "Branded Hashtag Campaign", category: "Hashtag Research & Strategy", level: "fortgeschrittene", text: "Erstelle 10 Branded-Hashtag-Optionen fuer [MARKE/PRODUKT] als Tabelle (Hashtag | Verfy-Verfuegbarkeit | Merkbarkeit | Launch-Strategie | Creator-Incentive). Kriterien: kurz, einpraegsam, verfuegbar, nutzbar, mit konkretem Launch-Plan." },
+      { id: 15, title: "Hashtag Performance Analysis", category: "Hashtag Research & Strategy", level: "anfaenger", text: "Analysiere diese 30 Hashtags: [HASHTAGS]. Erstelle eine Performance-Tabelle (Hashtag | Kategorie (zu-klein/ideal/zu-kompetitiv) | Volume | Engagement-Potenzial | Replacement). Gib mir Replacements fuer ineffektive Hashtags." },
+      { id: 16, title: "Seasonal & Evergreen Hashtag Mix", category: "Hashtag Research & Strategy", level: "fortgeschrittene", text: "Erstelle einen 12-Monats-Hashtag-Kalender fuer [BRANCHE]. Welche evergreen Hashtags nutze ich immer? Welche saisonalen Hashtags nutze ich in [MONAT]? Gib mir fuer jeden Monat einen optimierten Mix." },
+      { id: 17, title: "Hook-First Captions", category: "Caption & Copy-Writing", level: "anfaenger", text: "Schreibe 5 Instagram-Captions als Liste fuer einen Post ueber [TOPIC]. Jede mit: Hook-Typ (Frage/Fact/Kontraposition/Problem) | Hook-Text | Body | CTA | Hashtags. Alle sollten im Feed stoppen und Engagement triggern." },
+      { id: 18, title: "Story-Telling Copy Framework", category: "Caption & Copy-Writing", level: "fortgeschrittene", text: "Schreibe 3 Story-Captions als Liste fuer [BESCHREIBUNG]. Jede Caption folgt STAR-Rahmen (Situation > Task > Action > Result). Struktur: Kundenscenario | STAR-Struktur-Anwendung | subtile Produktpositionierung | emotionales Element | CTA. Verkaufe benefit, nicht features." },
+      { id: 19, title: "Carousel Copy per Slide", category: "Caption & Copy-Writing", level: "anfaenger", text: "Erstelle Copy fuer einen 5-Slide-Carousel ueber [TOPIC] als Tabelle. Struktur: Slide 1 = Hook (max. 100 Zeichen) | Slides 2-4 = Value-Punkte (max. 100 Zeichen je) | Slide 5 = CTA (max. 80 Zeichen). Jeder Slide sollte zum Weiter-Swipen triggern." },
+      { id: 20, title: "LinkedIn Authority Posting", category: "Caption & Copy-Writing", level: "fortgeschrittene", text: "Schreibe 1 LinkedIn-Post-Entwurf als formatierte Liste fuer [ROLLE] mit Expertise in [BEREICH]. Struktur: Kontroverses Take zu [TREND] | Backed mit Daten/Erfahrung | Thought-Leadership-Assertion | Diskussions-Frage | Klarer CTA. Ziel: Engagement-Diskussionen, nicht Likes." },
+      { id: 21, title: "Engagement-Analyse Tiefgang", category: "Engagement & Analytics", level: "anfaenger", text: "Analysiere meinen Post mit Metrics: [METRICS: Likes, Kommentare, Shares, Saves]. Gib mir eine Analyse-Tabelle: Was funktioniert (positiv) | Was nicht (schwach) | 3 konkrete Hypothesen-Tests mit Prognose | Konkrete Optimierungen fuer naechste Woche." },
+      { id: 22, title: "Audience Growth Funnel Analysis", category: "Engagement & Analytics", level: "fortgeschrittene", text: "Analysiere den Growth Funnel meines Accounts: [FOLLOWER ZAHL] Follower, [ENGAGEMENT RATE]% ER. Gib mir eine Tabelle (Funnel-Stufe | Problem-Diagnose | Root-Cause | 5 prioritierte Optimierungen) fuer Impression/Engagement/Conversion-Probleme." },
+      { id: 23, title: "Comment Management Strategy", category: "Engagement & Analytics", level: "anfaenger", text: "Erstelle Comment-Reply-Vorlagen fuer [MEIN ACCOUNT-TYP] mit Zielgruppe [ZIELGRUPPE]. Vorlage-Typen: positive Kommentare | kritische Fragen | Trolls (ignorieren/reagieren) | Product Inquiries | Community-Bau. Ziel: authentische Antworten, kein Arguing." },
+      { id: 24, title: "Reach vs. Engagement Trade-off", category: "Engagement & Analytics", level: "fortgeschrittene", text: "Erstelle eine Entscheidungsmatrix fuer [MEIN ACCOUNT-TYP: Branding/Sales/Community]. Matrix: Content-Type | Reach-Potenzial | Engagement-Potenzial | Conversion-Wahrscheinlichkeit | Empfehlung. Welche Content-Types fuer welche Ziele?" },
+      { id: 25, title: "Content Kalender-Audit", category: "Strategie & Workflow", level: "anfaenger", text: "Hier ist mein Content-Kalender fuer [MONAT]: [BESCHREIBUNG]. Passt das zu meinen Zielen ([ZIELE])? Fehlen wichtige Content-Typen? Ist das Mix ausgewogen (%), habe ich genug Variation? Gib mir konkrete Feedback und Optimierungen." },
+      { id: 26, title: "Multi-Platform Distribution Strategy", category: "Strategie & Workflow", level: "fortgeschrittene", text: "Erstelle einen Repurposing-Workflow fuer [CONTENT-IDEE] auf [PLATTFORMEN: Instagram, TikTok, LinkedIn, Pinterest]. Gib mir eine Tabelle (Plattform | Format | Timing | Copy-Variante | Hashtags | Metrics-Fokus) mit konkretem Workflow pro Plattform." },
+      { id: 27, title: "KPI-Tracking & Reporting", category: "Strategie & Workflow", level: "anfaenger", text: "Erstelle ein KPI-Tracking-Template fuer [MEIN ACCOUNT-TYP: Branding/Sales/Community]. Pro KPI: Name | Warum wichtig | Messmethode | Benchmark | Tracking-Frequenz. Gib mir 5-7 KPIs + monatliche Reporting-Vorlage als Tabelle." },
+      { id: 28, title: "Social Listening & Trend Monitoring", category: "Strategie & Workflow", level: "fortgeschrittene", text: "Erstelle einen Social Listening Plan fuer [BRANCHE]. Welche Keywords sollte ich monitoren? Welche Competitor-Moves sollte ich tracken? Welche Communities sollte ich beobachten? Gib mir ein Workflow-Template (Tools, Frequenz, Massnahmen)." }
+    ];
+    
+    let currentLevel = "all";
+    
+    function filterLevel(level) {
+      currentLevel = level;
+      document.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
+      event.target.classList.add("active");
+      renderPrompts();
+    }
+    
+    function getFilteredPrompts() {
+      const searchTerm = document.getElementById("searchBox").value.toLowerCase();
+      return prompts.filter(p => {
+        const matchesSearch = p.title.toLowerCase().includes(searchTerm) || 
+                            p.category.toLowerCase().includes(searchTerm) ||
+                            p.text.toLowerCase().includes(searchTerm);
+        const matchesLevel = currentLevel === "all" || p.level === currentLevel;
+        return matchesSearch && matchesLevel;
+      });
+    }
+    
+    function renderPrompts() {
+      const filtered = getFilteredPrompts();
+      const grid = document.getElementById("promptsGrid");
+      grid.innerHTML = "";
+      
+      filtered.forEach(prompt => {
+        const levelIcon = prompt.level === "anfaenger" ? "🟢" : "🟠";
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <div class="card-header">
+            <div>
+              <div class="card-title">${prompt.title}</div>
+              <div class="card-meta">
+                <span>${prompt.category}</span>
+                <span>&middot;</span>
+                <span>#${prompt.id}</span>
+              </div>
+            </div>
+            <div class="card-level">${levelIcon}</div>
+          </div>
+          <p class="card-text">${prompt.text}</p>
+          <button class="copy-btn" onclick="copyPrompt(event, ${prompt.id})">📋 Kopieren</button>
+        `;
+        grid.appendChild(card);
+      });
+      
+      document.getElementById("resultCount").textContent = filtered.length;
+      document.getElementById("resultText").textContent = filtered.length === 1 ? " Prompt gefunden" : " Prompts gefunden";
+      document.getElementById("noResults").classList.toggle("hidden", filtered.length > 0);
+    }
+    
+    function copyPrompt(event, id) {
+      const prompt = prompts.find(p => p.id === id);
+      navigator.clipboard.writeText(prompt.text).then(() => {
+        const btn = event.target;
+        btn.textContent = "✓ Kopiert!";
+        btn.classList.add("copied");
+        setTimeout(() => {
+          btn.textContent = "📋 Kopieren";
+          btn.classList.remove("copied");
+        }, 2000);
+      });
+    }
+    
+    function renderCategories() {
+      const counts = {};
+      prompts.forEach(p => {
+        counts[p.category] = (counts[p.category] || 0) + 1;
+      });
+      
+      const grid = document.getElementById("categoriesGrid");
+      Object.entries(counts).forEach(([cat, count]) => {
+        const card = document.createElement("div");
+        card.className = "category-card";
+        card.innerHTML = `<div class="category-name">${cat}</div><div class="category-count">${count} Prompts</div>`;
+        grid.appendChild(card);
+      });
+    }
+    
+    document.getElementById("searchBox").addEventListener("input", renderPrompts);
+    
+    renderPrompts();
+    renderCategories();
+  </script>
+</body>
+</html>
